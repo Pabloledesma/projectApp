@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h2>Projects</h2>
+@extends('layouts.app')
 
-    <ul>
+@section('content')
+
+    <h2>My Projects</h2>
+
+    <a href="/projects/create">Create new project</a>
+    <div class="row">
         @forelse ($projects as $project)
-            <li><a href="{{ $project->path() }}">{{ $project->title }}</a></li>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header"><a href="{{ $project->path() }}">{{ $project->title }}</a></div>
+                    <div class="card-body">
+                        <p class="card-text">{{ $project->description }}</p>
+                    </div>
+                </div>
+            </div>
         @empty
-            <li>No projects yet.</li>
+            <h3>No projects yet.</h3>
         @endforelse
+    </div>
 
-    </ul>
-</body>
-</html>
+
+@endsection
+
