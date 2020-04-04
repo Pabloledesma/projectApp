@@ -2,9 +2,15 @@
 
 @section('content')
 
-    <h2>My Projects</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>My Projects</h2>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-primary mb-5" href="/projects/create">Create new project</a>
+        </div>
+    </div>
 
-    <a href="/projects/create">Create new project</a>
     <div class="row">
         @forelse ($projects as $project)
             <div class="col-sm-4">

@@ -9,18 +9,29 @@
     <a href="/projects">Go back</a>
 
     <div class="row">
-        <div class="list-group">
-            @forelse ($project->tasks as $task)
-                <a href="#" class="list-group-item list-group-item-action active">
-                    <!--<div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Task title</h5>
-                        <small>3 days ago</small>
-                    </div>-->
-                    <p class="mb-1">{{ $task->body }}</small>
-                </a>
-            @empty
-                <p>No tasks yet</p>
-            @endforelse
+        @foreach ($project->tasks as $task)
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">{{ $task->body }}</div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <form action="{{ $project->path() . '/tasks' }}" method="POST">
+                @csrf
+                <div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <input class="form-control" name="body" type="text" placeholder="Begin adding tasks...">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="submit">Create Task</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
 @endsection
