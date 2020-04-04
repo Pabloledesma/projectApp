@@ -27,7 +27,7 @@ class ManageProjectsTest extends TestCase
     {
         $user = factory('App\User')->create();
 
-        $this->actingAs($user);
+        $this->signIn($user);
 
         $this->get('/projects/create')->assertStatus(200);
 
@@ -47,7 +47,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_view_their_project()
     {
-        $this->be(factory('App\User')->create());
+        $this->signIn();
 
         $this->withoutExceptionHandling();
 
@@ -63,7 +63,7 @@ class ManageProjectsTest extends TestCase
     {
         $project = factory('App\Project')->create();
 
-        $this->be(factory('App\User')->create());
+        $this->signIn();
 
         $this->get($project->path())->assertStatus(403);
     }
@@ -71,7 +71,8 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_title()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
+
         $attributes = factory('App\Project')->raw(['title' => '']);
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('title');
@@ -80,7 +81,8 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_description()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
+
         $attributes = factory('App\Project')->raw(['description' => '']);
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
