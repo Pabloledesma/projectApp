@@ -51,5 +51,23 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md 12">
+
+            <form action="{{ $project->path() }}" method="POST">
+                @csrf
+                @method('PATCH')
+
+                <textarea
+                    class="form-control"
+                    name="notes"
+                    placeholder="Anything especial that you want to make note of?">
+                    {{ $project->notes }}
+                </textarea>
+
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
 
 @endsection
