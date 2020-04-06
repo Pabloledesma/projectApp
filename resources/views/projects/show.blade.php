@@ -6,7 +6,8 @@
 
     <p>{{ $project->description }}</p>
 
-    <a href="/projects">Go back</a>
+    <a class="btn btn-secondary" href="/projects">Go back</a>
+    <a class="btn btn-primary" href="{{ $project->path() . '/edit' }}">Edit Project</a>
 
     <div class="row">
         @foreach ($project->tasks as $task)
